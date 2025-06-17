@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 
+
 const ownerSchema=new mongoose.Schema({
-   fullName: String,
+   fullname:String,
    email:String,
    password:String,
    products:{
     type:Array,
     default:[]
    },
-   contact:String,
    picture:String,
+   gstin:String,
 });
 const owner=mongoose.model("owner",ownerSchema);
 module.exports=owner;
