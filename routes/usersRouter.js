@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {registeruser}=require("../controllers/authcontoller");
+const {registeruser,loginuser}=require("../controllers/authcontoller");
 
 
 router.get("/", (req, res) => {
@@ -8,4 +8,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", registeruser);
+
+router.post("/login",loginuser);
 module.exports = router;
