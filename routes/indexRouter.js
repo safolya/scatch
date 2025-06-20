@@ -1,6 +1,6 @@
 const express=require("express");
 const app=express();
-const router=express.router();
+const router=express.Router();
 const isloggedin=require("../middlewares/isLoggedin");
 
 router.get("/",(req,res)=>{
