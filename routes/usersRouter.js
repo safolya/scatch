@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {registeruser,loginuser}=require("../controllers/authcontoller");
+const {registeruser,loginuser,logoutUser}=require("../controllers/authcontoller");
 
 
 /*router.get("/", (req, res) => {
@@ -10,5 +10,7 @@ const {registeruser,loginuser}=require("../controllers/authcontoller");
 router.post("/register", registeruser);
 
 router.post("/login",loginuser);
+
+router.get("/logout",logoutUser);
 
 module.exports = router;

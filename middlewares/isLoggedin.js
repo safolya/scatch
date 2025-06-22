@@ -7,12 +7,13 @@ module.exports=async(req,res,next)=>{
         return res.redirect("/");
     }else{
         try{
-           let decoded=jwt.verify(req.cookie.token, process.env.JWT_KEY);
+           let decoded=jwt.verify(req.cookies.token, process.env.JWT_KEY);
            let user=await userModel.findOne({email:decoded.email}).select("-password");
            req.user=user;
            next();
         }catch(err){
-            req.flash("error","somthimg went wrong");
+            //req.flash("error","somthimg went wrong");
+            console.log(err);
             res.redirect("/");
         }
     }

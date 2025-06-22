@@ -51,7 +51,7 @@ module.exports.loginuser=async(req,res)=>{
           let token = generatetoken(user);
           res.cookie("token",token);
           let products=await productModel.find();
-          res.render("shop.ejs",{products});
+          res.redirect("/shop");
         }else{
           req.flash("error" ,"Email or password is incorrect");
           res.redirect('/');
@@ -59,3 +59,7 @@ module.exports.loginuser=async(req,res)=>{
       });
     }
 }
+
+module.exports.logoutUser = (req,res)=>{
+  res.cookie("token", "").redirect("/")
+};
