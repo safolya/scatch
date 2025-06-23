@@ -20,6 +20,9 @@ router.get("/shop",isloggedin,async(req,res)=>{
 
 router.get("/cart",isloggedin,async(req,res)=>{
     let user=await userModel.findOne({email: req.user.email}).populate("cart");
+    user.cart.forEach(product => {
+        let bill=(Number(product.price)+20)-Number(product.discount);
+    });
     res.render("cart.ejs",{user});
 });
 
