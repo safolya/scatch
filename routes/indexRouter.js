@@ -23,7 +23,8 @@ router.get("/cart",isloggedin,async(req,res)=>{
     user.cart.forEach(product => {
         let bill=(Number(product.price)+20)-Number(product.discount);
     });
-    res.render("cart.ejs",{user});
+    let success=req.flash("success");
+    res.render("cart.ejs",{user,success});
 });
 
 router.get("/addtocart/:id",isloggedin,async(req,res)=>{
@@ -32,6 +33,15 @@ router.get("/addtocart/:id",isloggedin,async(req,res)=>{
     await user.save();
     req.flash("success","Added to Cart");
     res.redirect("/shop");
+});
+ //user.cart = user.cart.filter(productId => productId.toString() !== productIdToDelete.toString());
+router.get("/delete/:id",isloggedin,async(req,res)=>{
+    let user=await userModel.findOne({email: req.user.email});
+    productIdToDelete=req.params.id
+     user.cart = user.cart.filter(item => item.$oid !== productIdToDelete);
+    await user.save();
+    req.flash("success","Removed Succesfully");
+    res.redirect("/cart");
 });
 
 module.exports=router;
